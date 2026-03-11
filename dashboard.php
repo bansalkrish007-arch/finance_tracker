@@ -44,9 +44,10 @@ $recent_transactions = $stmt->get_result();
             <h1>Finance Tracker</h1>
             <div class="nav-links">
                 <span>Welcome, <?php echo $_SESSION['username']; ?></span>
-                <a href="dashboard.php" class="active">Dashboard</a>
+                <a href="dashboard.php" class="active"> Dashboard</a>
                 <a href="add_transaction.php">Add Transaction</a>
                 <a href="transaction.php">All Transactions</a>
+                <a href="savings.php">Savings</a>
                 <a href="reports.php">Reports</a>
                 <a href="logout.php">Logout</a>
             </div>
@@ -90,7 +91,7 @@ $recent_transactions = $stmt->get_result();
                         <td><?php echo ucfirst($row['type']); ?></td>
                         <td><?php echo $row['category']; ?></td>
                         <td><?php echo $row['description']; ?></td>
-                        <td>$<?php echo number_format($row['amount'], 2); ?></td>
+                        <td>₹<?php echo number_format($row['amount'], 2); ?></td>
                     </tr>
                     <?php endwhile; ?>
                 </tbody>
