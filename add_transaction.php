@@ -50,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <span>Welcome, <?php echo $_SESSION['username']; ?></span>
                 <a href="dashboard.php">Dashboard</a>
                 <a href="add_transaction.php" class="active">Add Transaction</a>
-                <a href="transactions.php">All Transactions</a>
+                <a href="transaction.php">All Transactions</a>
+                <a href="savings.php">Savings</a>
                 <a href="reports.php">Reports</a>
                 <a href="logout.php">Logout</a>
             </div>
