@@ -47,4 +47,61 @@ INSERT INTO categories (name, type, is_default) VALUES
 ('Bills & Utilities', 'expense', TRUE),
 ('Healthcare', 'expense', TRUE),
 ('Education', 'expense', TRUE),
+
 ('Other Expense', 'expense', TRUE);
+
+-- Add budget table
+CREATE TABLE IF NOT EXISTS budgets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    month_year DATE NOT NULL,
+    alert_threshold INT DEFAULT 80,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_user_category_month (user_id, category, month_year)
+);
+
+-- Add savings goals table
+CREATE TABLE IF NOT EXISTS savings_goals (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    goal_name VARCHAR(100) NOT NULL,
+    target_amount DECIMAL(10,2) NOT NULL,
+    current_amount DECIMAL(10,2) DEFAULT 0,
+    deadline DATE,
+    category VARCHAR(50),
+    priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
+    status ENUM('active', 'completed', 'cancelled') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Add reminders table
+CREATE TABLE IF NOT EXISTS reminders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    reminder_date DATE NOT NULL,
+    reminder_time TIME,
+    type ENUM('budget', 'bill', 'goal', 'custom') DEFAULT 'custom',
+    recurring ENUM('none', 'daily', 'weekly', 'monthly') DEFAULT 'none',
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Add budget alerts table
+CREATE TABLE IF NOT EXISTS budget_alerts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    budget_amount DECIMAL(10,2) NOT NULL,
+    spent_amount DECIMAL(10,2) NOT NULL,
+    percentage_used INT NOT NULL,
+    alert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_acknowledged BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
