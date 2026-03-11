@@ -411,7 +411,7 @@ $categories = $stmt->get_result();
                 ?>
                 <div class="trend-indicator">
                     <i class="fas <?php echo $trend_icon . ' ' . $trend_class; ?>"></i>
-                    <?php echo $trend >= 0 ? '+' : ''; ?>$<?php echo number_format(abs($trend), 2); ?> vs last month
+                    <?php echo $trend >= 0 ? '+' : ''; ?>₹<?php echo number_format(abs($trend), 2); ?> vs last month
                 </div>
                 <div class="savings-rate">
                     <strong>Savings Rate:</strong> <?php echo $savings_rate; ?>%
