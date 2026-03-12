@@ -555,8 +555,8 @@ $categories = $stmt->get_result();
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                                 <span>Progress: <?php echo $progress; ?>%</span>
                                 <span>
-                                    $<?php echo number_format($goal['current_amount'], 2); ?> / 
-                                    $<?php echo number_format($goal['target_amount'], 2); ?>
+                                    ₹<?php echo number_format($goal['current_amount'], 2); ?> / 
+                                    ₹<?php echo number_format($goal['target_amount'], 2); ?>
                                 </span>
                             </div>
                             <div class="budget-progress">
